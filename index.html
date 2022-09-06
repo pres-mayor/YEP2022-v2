@@ -21,12 +21,29 @@
 </div>
 <script type="text/javascript">
     function onScanSuccess(decodedText, decodedResult) {
-    // Handle on success condition with the decoded text or result.
-    
-    console.log(`Scan result: ${decodedText}`, decodedResult);
-}
+        // Handle on success condition with the decoded text or result.
+        testPoset();
+        console.log(`Scan result: ${decodedText}`, decodedResult);
+    }
 
-var html5QrcodeScanner = new Html5QrcodeScanner(
-	"reader", { fps: 10, qrbox: 250 });
-html5QrcodeScanner.render(onScanSuccess);
+    function testPoset() {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "dHJhZWdlcmFwcDptazU0VVdpU3ZtdkRMSkVYeFRSc1JaSjdiUXhlSnZEQXBuV0xPU05TVnNmZUh6YUR3UE03MnFBN29Kc0NST2ZVZ212RUM3clVoMklMUTdzOXlSenVTQ0l0TTk2aGhQdkJraXc=");
+        myHeaders.append("Content-Type", "application/json");
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch("https://link.24-7intouch.com/v1/auth/Test", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    }
+
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader", { fps: 10, qrbox: 250 });
+    html5QrcodeScanner.render(onScanSuccess);
 </script>
